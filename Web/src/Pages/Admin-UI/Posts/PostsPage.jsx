@@ -54,10 +54,10 @@ export default function PostsPage() {
       width: "100px"
     },
     {
-      name: "Name",
-      selector: row => row.userName,
+      name: "ID",
+      selector: row => row._id,
       sortable: true,
-      sortField: "userName"
+      sortField: "userName",
     },
     {
       name: "Image/Video",
@@ -68,7 +68,8 @@ export default function PostsPage() {
               <img
                   src={row.media}
                   className="media-img"
-                  alt="media image"
+                  alt="media"
+                  style={{width:129}}
               />
               ) : (
               <video
@@ -219,7 +220,7 @@ export default function PostsPage() {
         sortBy: sortColumn,
         sortOrder: sortDirection
       });
-
+console.log("البيانات القادمة من السيرفر:", res.posts[0]);
       setPosts(res.posts);
       setTotalRows(res.total);
       setTypesCount(res.count);

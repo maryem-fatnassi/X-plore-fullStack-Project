@@ -13,6 +13,7 @@ import RarePlacesPage from "./RarePlaces/RarePlacesPage";
 import RarePlaceEdit from "./RarePlaces/RarePlaceEdit";
 
 import "../../CSS/Admin/AdminPage.css";
+import JoinedUsersChallenge from "./Challenges/JoinedUsersChallenge";
 
 export default function AdminPage() {
   return (
@@ -34,6 +35,7 @@ export default function AdminPage() {
           <Route path="challenges" element={<ChallengesPage />} />
           <Route path="challenges/edit/:id" element={<ChallengeEdit />} />
           <Route path="challenges/new" element={<ChallengeEdit />} />
+          <Route path="challenges/users/:id" element={<JoinedUsersChallenge />}/>
 
           <Route path="places" element={<RarePlacesPage />} />
           <Route path="places/edit/:id" element={<RarePlaceEdit />} />

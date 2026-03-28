@@ -132,19 +132,19 @@ export default function UserPage() {
       name: "Actions",
       cell: row => (
         <div className="actions-cell">
-          <button
+          {/* <button
             className={`action-btn toggle ${row.active ? "active" : "inactive"}`}
             // onClick={() => handleToggleActive(row)}
           >
             <i className={`fa ${row.active ? "fa-lock-open" : "fa-lock"}`}></i>
-          </button>
+          </button> */}
 
-          <button
+          {/* <button
             className="action-btn edit"
             onClick={() => navigate(`/admin/users/edit/${row._id}`)}
           >
             <i className="fa fa-pen"></i>
-          </button>
+          </button> */}
 
           <button
             className="action-btn delete"

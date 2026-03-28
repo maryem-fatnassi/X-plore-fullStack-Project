@@ -62,7 +62,8 @@ export default function ChallengesPage() {
               <img
                   src={row.image}
                   className="media-img"
-                  alt="media image"
+                  alt="media"
+                  style={{width: 136}}
               />
               ) : null}
         </div>
@@ -155,6 +156,12 @@ export default function ChallengesPage() {
             }}
           >
             <i className="fa fa-trash"></i>
+          </button>
+          <button style={{backgroundColor:"green"}}
+            className="action-btn users"
+            onClick={() => navigate(`/admin/challenges/users/${row._id}`)}
+          >
+            <i className="fa fa-users"></i>
           </button>
         </div>
       ),

@@ -58,7 +58,8 @@ export default function RarePlacesPage() {
               <img
                   src={row.image}
                   className="media-img"
-                  alt="media image"
+                  alt="media"
+                  style={{width:147}}
               />
               ) : null}
         </div>

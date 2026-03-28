@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ChallengeCard from './ChallengeCard';
+import '../../../CSS/RegisteredUsersCss/ChallengesCSS/ChallengesCard.css'
+import { useNavigate } from 'react-router-dom';
 
 // const MyJoinedChallenges = () => {
 //     const [challenges, setChallenges] = useState([]);
@@ -72,7 +74,7 @@ import ChallengeCard from './ChallengeCard';
 const MyJoinedChallenges = () => {
     const [challenges, setChallenges] = useState([]);
     // const [loading, setLoading] = useState(true);
-
+    const navigate = useNavigate()
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"));
         const userId = user?.id;
@@ -97,7 +99,7 @@ const MyJoinedChallenges = () => {
     return (
         <div style={styles.pageWrapper}>
             <h1 style={styles.heading}>My <span style={{color: '#FB923C'}}>Challenges</span></h1>
-            <button >Back</button>
+            <button className='backBtn' onClick={()=>navigate("/challenges")}>Back</button>
             <div style={styles.container}>
                 {challenges.length > 0 ? (
                     challenges.map((item) => (
@@ -142,7 +144,7 @@ const styles = {
         textAlign: 'center',
         marginTop: '50px',
         width: '100%'
-    }
+    },
 };
 
 

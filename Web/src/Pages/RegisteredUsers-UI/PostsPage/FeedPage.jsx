@@ -19,7 +19,6 @@ import "../../../CSS/RegisteredUsersCss/PostsCSS/feed.css";
 import Navbar from "../../../Components/NavSection";
 
 const FeedPage = () => {
-  // 1. إدارة حالة المنشورات (State for Posts List)
   const [posts, setPosts] = useState([]);
   const userData = JSON.parse(localStorage.getItem("user"));
   const userId = userData?.id || userData?._id;
@@ -45,43 +44,45 @@ const FeedPage = () => {
     return date.toLocaleDateString();
   };
 
-const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
-// دالة لاختيار الملف من الجهاز
-const handleFileChange = (e) => {
-  setSelectedFile(e.target.files[0]);
-};
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
 
-const handlePostSubmit = async () => {
-  if (!newPostContent.trim() && !selectedFile) return;
+  const handlePostSubmit = async () => {
+    // console.log("click")
+    if (!newPostContent.trim() && !selectedFile) return;
 
-  // استخدام FormData بدلاً من JSON
-  const formData = new FormData();
-  formData.append("userId", userId);
-  formData.append("description", newPostContent);
-  formData.append("location", "Crystal Caves");
-  if (selectedFile) {
-    formData.append("media", selectedFile);
-  }
+    const formData = new FormData();
+    formData.append("userId", userId);
+    formData.append("description", newPostContent);
+    formData.append("location", "Crystal Caves");
+    formData.append("status", "pending");
+    if (selectedFile) {
+      formData.append("media", selectedFile);
+    }
 
-  try {
-    const response = await fetch("http://localhost:5000/api/posts/create", {
-      method: "POST",
-      // ملاحظة: لا تضع Headers للـ Content-Type، المتصفح سيفعل ذلك تلقائياً مع FormData
-      body: formData 
-    });
-    
-    const savedPost = await response.json();
-    setPosts([savedPost, ...posts]);
-    setNewPostContent('');
-    setSelectedFile(null);
-  }catch (error) {
-  console.error("Full Error Details:", error); // هذا سيخبرك إذا كان الخطأ 404 أو 500 أو Network Error
-  alert("Upload Failed: " + error.message);
-}
-};
+    try {
+      const response = await fetch("http://localhost:5000/api/posts/create", {
+        method: "POST",
+        body: formData,
+      })
+      .then(async (res) => {
+       const text = await res.text();
+       console.log("SERVER RESPONSE:", text);
+      })
+      // await response.json();
+      // setPosts([savedPost, ...posts]);
+      alert("Wait admin to accept post")
+      setNewPostContent("");
+      setSelectedFile(null);
+    } catch (error) {
+      console.error("Full Error Details:", error);
+      alert("Upload Failed: " + error.message);
+    }
+  };
 
-  // 4. الإعجاب (Like)
   const handleLikeToggle = async (postId) => {
     try {
       const response = await fetch(
@@ -104,12 +105,10 @@ const handlePostSubmit = async () => {
     }
   };
 
-  // 2. إدارة حالة إنشاء منشور جديد (State for New Post Form)
   const [newPostContent, setNewPostContent] = useState("");
-  const [activeCommentId, setActiveCommentId] = useState(null); // معرف التعليق النشط حالياً
+  const [activeCommentId, setActiveCommentId] = useState(null);
   const [newCommentText, setNewCommentText] = useState("");
 
-  // ج. إضافة تعليق جديد (Submit New Comment)
   const handleCommentSubmit = async (postId) => {
     if (!newCommentText.trim()) return;
 
@@ -121,7 +120,7 @@ const handlePostSubmit = async () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             userId: userId,
-            userName: userData.userName, // نأخذه من الـ localStorage
+            userName: userData.userName,
             text: newCommentText,
           }),
         },
@@ -131,7 +130,6 @@ const handlePostSubmit = async () => {
 
       const updatedComments = await response.json();
 
-      // تحديث الواجهة فوراً بالتعليقات الجديدة من السيرفر
       setPosts(
         posts.map((post) => {
           if (post._id === postId) {
@@ -142,7 +140,7 @@ const handlePostSubmit = async () => {
       );
 
       setNewCommentText("");
-      setActiveCommentId(null); // إغلاق صندوق التعليقات بعد الإرسال
+      setActiveCommentId(null); 
     } catch (error) {
       alert("Could not send transmission: " + error.message);
     }
@@ -154,7 +152,7 @@ const handlePostSubmit = async () => {
       <div className="xplore-feed-page">
         <div className="feed-layout-wrapper">
           <div className="feed-layout">
-            {/* === 1. منطقة إنشاء المنشور (Create Post Area) === */}
+            {/* === 1. (Create Post Area) === */}
             <div className="create-post-glass">
               <div className="create-header">
                 <UserCircle className="default-avatar" size={40} />
@@ -162,37 +160,40 @@ const handlePostSubmit = async () => {
                   placeholder="What did you discover today, Explorer?"
                   value={newPostContent}
                   onChange={(e) => setNewPostContent(e.target.value)}
+                  style={{ color: "#fff" }}
                 />
               </div>
               <div className="create-actions">
-<div className="upload-options">
-  <input 
-    type="file" 
-    id="file-upload" 
-    style={{ display: 'none' }} 
-    onChange={handleFileChange} 
-    accept="image/*,video/*"
-  />
-  <label htmlFor="file-upload" className="media-btn">
-    <Image size={18}/> Photo/Video
-  </label>
-  {selectedFile && <span className="file-name">{selectedFile.name}</span>}
-</div>
+                <div className="upload-options">
+                  <input
+                    type="file"
+                    id="file-upload"
+                    style={{ display: "none" }}
+                    onChange={handleFileChange}
+                    accept="image/*,video/*"
+                  />
+                  <label htmlFor="file-upload" className="media-btn">
+                    <Image size={18} /> Photo/Video
+                  </label>
+                  {selectedFile && (
+                    <span className="file-name">{selectedFile.name}</span>
+                  )}
+                </div>
                 <button className="publish-btn" onClick={handlePostSubmit}>
                   <PlusCircle size={18} /> PUBLISH LOG
                 </button>
               </div>
             </div>
 
-            {/* === 2. قائمة المنشورات (Posts List) === */}
+            {/* === 2.(Posts List) === */}
             <div className="posts-container">
               {posts.map((post) => (
                 <div key={post.id} className="post-card-luxury">
-                  {/* رأس المنشور (Post Header) */}
+                  {/* (Post Header) */}
                   <header className="post-header">
-                    {/* عرض أول حرف من الاسم بدلاً من الـ Avatar */}
+                    {/* Avatar */}
                     <div className="user-avatar-placeholder">
-                      {post.user?.userName?.charAt(0).toUpperCase() || "E"}
+                      {post.user?.userName?.charAt(0).toUpperCase() || "U"}
                     </div>
                     <div className="user-details">
                       <h4 className="user-name">{post.user?.userName}</h4>
@@ -203,7 +204,7 @@ const handlePostSubmit = async () => {
                     </div>
                   </header>
 
-                  {/* المحتوى (Content) */}
+                  {/* (Content) */}
                   <div className="post-main">
                     <p className="post-desc">{post.description}</p>
                     {post.media && (
@@ -223,7 +224,7 @@ const handlePostSubmit = async () => {
                     )}
                   </div>
 
-                  {/* شريط التفاعل (Interaction Bar) */}
+                  {/* (Interaction Bar) */}
                   <footer className="post-footer">
                     <div className="stats-bar">
                       <button
@@ -251,7 +252,7 @@ const handlePostSubmit = async () => {
                       </button>
                     </div>
 
-                    {/* قسم التعليقات (Comments Section) */}
+                    {/* (Comments Section) */}
                     <div
                       className={`comments-section ${activeCommentId === post._id ? "active" : ""}`}
                     >
@@ -259,7 +260,14 @@ const handlePostSubmit = async () => {
                         {post.comments.map((comment, index) => (
                           <div key={index} className="comment-item">
                             <strong>{comment.userName}</strong>: {comment.text}
-                            <span className="comment-time" style={{fontSize:"10px",color:"goldenrod",marginLeft:"8px"}}>
+                            <span
+                              className="comment-time"
+                              style={{
+                                fontSize: "10px",
+                                color: "goldenrod",
+                                marginLeft: "8px",
+                              }}
+                            >
                               {" "}
                               • {formatTime(comment.createdAt)}
                             </span>

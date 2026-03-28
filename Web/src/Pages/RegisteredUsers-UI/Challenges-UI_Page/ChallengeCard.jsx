@@ -1,10 +1,10 @@
 import React from 'react';
 import { MapPin, Clock, Zap } from 'lucide-react'; 
-import '../../../CSS/RegisteredUsersCss/ChallengesCSS/ChallengesCard.css'
+
 
 const ChallengeCard = ({ challenge }) => {
   return (
-    <div style={styles.card}>
+    <div style={styles.card} className='card'>
       <div style={{ ...styles.imageSection, backgroundImage: `url(${challenge.image})` }}>
         <div style={styles.difficultyBadge}>{challenge.difficulty}</div>
         <div style={styles.typeBadge}>{challenge.type}</div>

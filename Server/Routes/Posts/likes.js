@@ -3,7 +3,6 @@ const postRouter = express.Router();
 const Post = require("../../Models/RegisteredUsers/posts");
 
 
-// 3. التفاعل مع الإعجاب (Like/Unlike)
 postRouter.post("/like/:postId", async (req, res) => {
   try {
     const { userId } = req.body;

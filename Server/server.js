@@ -17,10 +17,11 @@ app.use("/rarePlaces", require("./Routes/RarePlaces/places"));
 app.use("/fetchPlaces",require("./Routes/RarePlaces/getPlaces"));
 
 // ** Challenges ** 
-app.use("/challenges",require("./Routes/Challenges/challengePost"));
-app.use("/getChallenges",require("./Routes/Challenges/getChallenges"))
-app.use("/api/challenges", require("./Routes/Challenges/challengeJoinedUsers"));
-app.use("/api/my-challenges",require("./Routes/Challenges/userChallenges"))
+app.use("/challenges",require("./Routes/Challenges/challengePost")); // post
+app.use("/getChallenges",require("./Routes/Challenges/getChallenges")) // get
+app.use("/api/challenges", require("./Routes/Challenges/challengeJoinedUsers")); 
+app.use("/api/my-challenges",require("./Routes/Challenges/userChallenges"));
+// app.use("/api/challenges",require("./Routes/Challenges/usersChallenge")); // get challenge by ID and get usersJoined to that challenge = for admin page
 
 //** Posts **/
 app.use("/api/posts",require("./Routes/Posts/createPost"));

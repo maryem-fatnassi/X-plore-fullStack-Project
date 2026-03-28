@@ -111,13 +111,13 @@ export default function ChallengeForm({ id, onSuccess, onCancel }) {
               <img
                 src={imagePreview}
                 className="image-img-input"
-                alt="image"
+                alt="img"
               />
             ) : form.image ? (
               <img
                 src={form.image}
                 className="image-img-input"
-                alt="image"
+                alt="imag"
               />
             ) :
               <div className="image-img-input">

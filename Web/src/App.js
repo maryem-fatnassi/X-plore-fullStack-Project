@@ -18,6 +18,7 @@ import AdminPage from "./Pages/Admin-UI/AdminPage";
 import MyProfile from "./Pages/Profile/MyProfile";
 import Preloader from "./Components/Splash";
 import MyJoinedChallenges from "./Pages/RegisteredUsers-UI/Challenges-UI_Page/MyJoinedChallenges";
+import JoinedUsersChallenge from "./Pages/Admin-UI/Challenges/JoinedUsersChallenge";
 
  function App(){
   return(
@@ -45,19 +46,8 @@ import MyJoinedChallenges from "./Pages/RegisteredUsers-UI/Challenges-UI_Page/My
 // function App() {
 //   return (
 //     <div className="App">
-      {/* <Navbar/> */}
-      {/* <Home/>
-      <RarePlacesPage/> */}
-      {/* <ChallengesPage/> */}
-      {/* <FeedPage/>
-      <LoginSignUp/> 
-      <HeroSection/>
-      <VisitorTeaser/>
-      <VisitorMission/>
-      <VisitorShowcase/>
-      <Final/>
-      <Footer/> */}
-//      </div>
+//       <JoinedUsersChallenge/>
+//     </div>
 //   );
 // }
 
