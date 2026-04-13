@@ -1,6 +1,6 @@
 export const joinChallengeService = async (challengeId, userId) => {
   try {
-    const response = await fetch(`http://localhost:5000/api/challenges/join`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/challenges/join`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ challengeId, userId }),

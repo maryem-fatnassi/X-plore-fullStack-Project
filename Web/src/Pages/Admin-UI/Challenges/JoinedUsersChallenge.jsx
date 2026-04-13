@@ -7,7 +7,7 @@ const JoinedUsersChallenge = ({ challengeTitle = "Rare Oasis Discovery" }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
 const { id } = useParams(); // URL parameter: /admin/challenges/:challengeId/users
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
   console.log(id)
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
@@ -55,10 +55,10 @@ console.log(users)
     <div className="admin-view-wrapper">
       <div className="view-header">
         <div className="header-left">
-          <button className="icon-btn-back"><ArrowLeft size={20} /></button>
+          <button className="icon-btn-back"><ArrowLeft size={20} onClick={()=> navigate("/admin/challenges")}/></button>
           <div>
             <p className="breadcrumb">Challenges / Participants</p>
-            <h1 className="challenge-title">{challengeTitle}</h1>
+            {/* <h1 className="challenge-title">{challengeTitle}</h1> */}
           </div>
         </div>
 
@@ -79,7 +79,10 @@ console.log(users)
           <div key={user._id} className="participant-card">            
             <div className="avatar-section">
               <div className="avatar-ring">
-                <img src={user.avatar} alt={user.userName} />
+                { user.avatar ?
+                  <img src={user.avatar} alt={user.userName} /> :
+                  <img src='http://localhost:3000/images/unknown_user_male1.jpg' alt='user'/>
+                  }
               </div>
             </div>
 

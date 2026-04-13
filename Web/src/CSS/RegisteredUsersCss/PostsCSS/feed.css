@@ -132,6 +132,7 @@ textarea {
   margin: 0;
   font-weight: 700;
   color: #fff;
+  text-align: justify;
 }
 .user-rank {
   font-size: 0.7rem;

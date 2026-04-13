@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/admin/posts";
+const API_URL = `${process.env.REACT_APP_API_URL}/api/admin/posts`;
 
 export async function getPosts({ page = 1, limit = 5, status = "pending" , sortBy = "createdAt", sortOrder = 'desc'}) {
   try {

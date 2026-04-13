@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const connectDB = require("./Config/db");
 connectDB();
-
+console.log(process.env.MONGO_URI)
 // ** Authentication **
 app.use("/api/users", require("./Routes/auth/signUp"));
 app.use("/api/users", require("./Routes/auth/login"));

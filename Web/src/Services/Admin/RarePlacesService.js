@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/admin/rare-places";
+const API_URL = `${process.env.REACT_APP_API_URL}/api/admin/rare-places`;
 
 export async function getRarePlaces({ page = 1, limit = 10, sortBy = "createdAt", sortOrder = 'desc'}) {
   try {

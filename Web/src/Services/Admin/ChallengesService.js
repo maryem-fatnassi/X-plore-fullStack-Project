@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/admin/challenges";
+const API_URL = `${process.env.REACT_APP_API_URL}/api/admin/challenges`;
 
 export async function getChallenges({ page = 1, limit = 10, difficulty = "easy" , sortBy = "createdAt", sortOrder = 'desc'}) {
   try {

@@ -80,7 +80,7 @@ const MyJoinedChallenges = () => {
         const userId = user?.id;
 
         if (userId) {
-            fetch(`http://localhost:5000/api/my-challenges/${userId}`)
+            fetch(`${process.env.REACT_APP_API_URL}/api/my-challenges/${userId}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log("Fetched successfully:", data);

@@ -25,7 +25,7 @@ const FeedPage = () => {
 
   useEffect(() => {
     const loadPosts = async () => {
-      const response = await fetch("http://localhost:5000/api/posts/all");
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/posts/all`);
       const data = await response.json();
       setPosts(data);
     };
@@ -64,7 +64,7 @@ const FeedPage = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/posts/create", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/posts/create`, {
         method: "POST",
         body: formData,
       })
@@ -74,7 +74,7 @@ const FeedPage = () => {
       })
       // await response.json();
       // setPosts([savedPost, ...posts]);
-      alert("Wait admin to accept post")
+      alert("Wait for the admin to accept the post..")
       setNewPostContent("");
       setSelectedFile(null);
     } catch (error) {
@@ -86,7 +86,7 @@ const FeedPage = () => {
   const handleLikeToggle = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/posts/like/${postId}`,
+        `${process.env.REACT_APP_API_URL}/api/posts/like/${postId}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -114,7 +114,7 @@ const FeedPage = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/posts/comment/${postId}`,
+        `${process.env.REACT_APP_API_URL}/api/posts/comment/${postId}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -190,7 +190,7 @@ const FeedPage = () => {
               {posts.map((post) => (
                 <div key={post.id} className="post-card-luxury">
                   {/* (Post Header) */}
-                  <header className="post-header">
+                  <header className="post-header" style={{cursor:'pointer'}}>
                     {/* Avatar */}
                     <div className="user-avatar-placeholder">
                       {post.user?.userName?.charAt(0).toUpperCase() || "U"}

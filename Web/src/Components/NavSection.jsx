@@ -19,7 +19,8 @@ const Navbar = () => {
       <div className="navbar-container">
         <div className="logo">X-Plore</div>
 
-        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+        {
+          location.pathname !== "/visitors" ? <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <li><Link to={"/home"}>Home</Link></li>
           <li><Link to={"/rarePlaces"}>Rare Places</Link></li>
           <li><Link to={"/challenges"}>Challenges</Link></li>
@@ -29,7 +30,8 @@ const Navbar = () => {
             <span className="icon"><i class="fa-solid fa-bell"></i></span>
             <span className="icon"><i class="fa-solid fa-user"></i></span>
           </li>
-        </ul>
+        </ul> : null
+        }
 
         <div className="desktop-icons">
           {/* <button className="icon-btn" title="Notifications" onClick={() => setIsNotifOpen(true)}><i class="fa-solid fa-bell"></i></button> */}

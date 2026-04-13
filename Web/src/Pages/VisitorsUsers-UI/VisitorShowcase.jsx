@@ -7,7 +7,7 @@ const VisitorShowcase = () => {
 const [places, setplaces] = useState([]);
 
   useEffect(()=>{
-    fetch("http://localhost:5000/fetchPlaces/place")
+    fetch(`${process.env.REACT_APP_API_URL}/fetchPlaces/place`)
       .then((res) => res.json())
       .then((data) => setplaces(data.slice(0,3)))
       .catch((error) => console.error(error))

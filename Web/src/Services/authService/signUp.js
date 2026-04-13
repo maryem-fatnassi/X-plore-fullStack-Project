@@ -1,6 +1,6 @@
 export async function signUp(form){
     try {
-        const res = await fetch("http://localhost:5000/api/users/signUp",{
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/users/signUp`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"

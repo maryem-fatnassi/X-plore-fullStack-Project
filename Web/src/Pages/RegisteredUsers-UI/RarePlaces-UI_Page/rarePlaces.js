@@ -16,7 +16,6 @@ const RarePlacesPage = () => {
   return (
     <div className="slider-wrapper">
       <Navbar />
-      {/* الخلفية التي تتغير ديناميكياً مع المكان النشط */}
       <div className="dynamic-bg">
         {allPlaces.map((p, i) => (
           <img
@@ -47,7 +46,6 @@ const RarePlacesPage = () => {
           </button>
         </div>
 
-        {/* المصغرات (Navigation) - هذا الجزء يجعل التصميم قابلاً للتوسع */}
         <div className="thumbnails-nav">
           {allPlaces.map((p, i) => (
             <div

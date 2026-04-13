@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/admin/users";
+const API_URL = `${process.env.REACT_APP_API_URL}/api/admin/users`;
 
 export async function getUsers({ page = 1, limit = 5, role = "users", sortBy = "createdAt", sortOrder = 'desc'}) {
   try {
