@@ -7,8 +7,8 @@ export async function login(form){
             body:JSON.stringify(form)
         });
         if(!res.ok){
-            const errorData = await res.json()
-            throw {res:{data : errorData}}
+            await res.json()
+            throw new Error('something went wrong')
         }
 
 // const data = await res.json()
